@@ -6,7 +6,7 @@ use Moo;
 with 'WebService::Toggl::Role::Base';
 use namespace::clean;
 
-our $VERSION = "0.02";
+our $VERSION = "0.03";
 
 
 has 'me' => (is =>'ro', lazy => 1, builder => 1);
