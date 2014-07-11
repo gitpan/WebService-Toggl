@@ -1,6 +1,5 @@
 package WebService::Toggl::Request;
 
-use Data::Printer;
 use HTTP::Tiny;
 use MIME::Base64 qw(encode_base64);
 use URI::Escape qw(uri_escape);

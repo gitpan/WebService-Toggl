@@ -27,7 +27,7 @@ no_index:
 provides:
   WebService::Toggl:
     file: lib/WebService/Toggl.pm
-    version: '0.03'
+    version: '0.04'
   WebService::Toggl::API:
     file: lib/WebService/Toggl/API.pm
   WebService::Toggl::API::Client:
@@ -101,4 +101,4 @@ resources:
   bugtracker: https://github.com/felliott/WebService-Toggl/issues
   homepage: https://github.com/felliott/WebService-Toggl
   repository: git://github.com/felliott/WebService-Toggl
-version: '0.03'
+version: '0.04'

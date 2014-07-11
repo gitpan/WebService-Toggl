@@ -1,6 +1,5 @@
 package WebService::Toggl::API::User;
 
-use Data::Printer;
 use Sub::Quote qw(quote_sub);
 use WebService::Toggl::Role::Item as => 'JsonItem';
 

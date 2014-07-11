@@ -1,6 +1,5 @@
 package WebService::Toggl::Role::Base;
 
-use Data::Printer;
 use Module::Runtime qw(use_package_optimistically);
 use Storable qw(dclone);
 use WebService::Toggl::Request;
