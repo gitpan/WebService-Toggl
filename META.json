@@ -66,7 +66,7 @@
    "provides" : {
       "WebService::Toggl" : {
          "file" : "lib/WebService/Toggl.pm",
-         "version" : "0.01"
+         "version" : "0.02"
       },
       "WebService::Toggl::API" : {
          "file" : "lib/WebService/Toggl/API.pm"
@@ -154,5 +154,5 @@
       }
    },
    "release_status" : "stable",
-   "version" : "0.01"
+   "version" : "0.02"
 }

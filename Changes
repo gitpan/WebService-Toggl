@@ -1,5 +1,9 @@
 Revision history for Perl extension WebService-Toggl
 
+0.02 2014-07-11T01:30:20Z
+
+    - fix broken test that was testing the wrong modules
+
 0.01 2014-07-10T15:09:46Z
 
     - original version

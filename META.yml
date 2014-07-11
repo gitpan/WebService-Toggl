@@ -27,7 +27,7 @@ no_index:
 provides:
   WebService::Toggl:
     file: lib/WebService/Toggl.pm
-    version: '0.01'
+    version: '0.02'
   WebService::Toggl::API:
     file: lib/WebService/Toggl/API.pm
   WebService::Toggl::API::Client:
@@ -97,4 +97,4 @@ requires:
   URI::Escape: '0'
   namespace::clean: '0'
   perl: '5.008001'
-version: '0.01'
+version: '0.02'
