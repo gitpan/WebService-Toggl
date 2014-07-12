@@ -1,12 +1,12 @@
 package WebService::Toggl::API::Workspaces;
 
 use Moo;
-with 'WebService::Toggl::API', 'WebService::Toggl::Role::Set';
+with 'WebService::Toggl::Role::API', 'WebService::Toggl::Role::Set';
 use namespace::clean;
 
 sub list_of { '::Workspace' }
 
-sub my_url { '/workspaces' }
+sub api_path { 'workspaces' }
 
 1;
 __END__

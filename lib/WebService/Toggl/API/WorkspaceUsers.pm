@@ -1,12 +1,12 @@
 package WebService::Toggl::API::WorkspaceUsers;
 
 use Moo;
-with 'WebService::Toggl::API', 'WebService::Toggl::Role::Set';
+with 'WebService::Toggl::Role::API', 'WebService::Toggl::Role::Set';
 use namespace::clean;
 
 sub list_of { '::WorkspaceUser' }
 
-sub my_url { '/workspaces/' . shift->workspace_id . '/users' }
+sub api_path { 'workspaces/' . shift->workspace_id . '/users' }
 
 
 1;

@@ -1,4 +1,4 @@
-package WebService::Toggl::Report;
+package WebService::Toggl::Role::Report;
 
 use DateTime;
 use Sub::Quote qw(quote_sub);
@@ -6,12 +6,12 @@ use Sub::Quote qw(quote_sub);
 use Moo::Role;
 with 'WebService::Toggl::Role::Base';
 
+requires 'api_path';
+
 has base_url => (is => 'ro', default => '/reports/api/v2');
 
 has my_url   => (is => 'ro', lazy => 1, builder => 1);
 sub _build_my_url { $_[0]->base_url . '/' . $_[0]->api_path }
-
-requires 'api_path';
 
 has raw => (is => 'ro', lazy => 1, builder => 1);
 sub _build_raw {

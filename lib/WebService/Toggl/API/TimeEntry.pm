@@ -4,7 +4,7 @@ use Sub::Quote qw(quote_sub);
 use WebService::Toggl::Role::Item as => 'JsonItem';
 
 use Moo;
-with 'WebService::Toggl::API';
+with 'WebService::Toggl::Role::API';
 use namespace::clean;
 
 with JsonItem(

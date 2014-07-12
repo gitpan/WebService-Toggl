@@ -1,12 +1,12 @@
 package WebService::Toggl::API::Users;
 
 use Moo;
-with 'WebService::Toggl::API', 'WebService::Toggl::Role::Set';
+with 'WebService::Toggl::Role::API', 'WebService::Toggl::Role::Set';
 use namespace::clean;
 
 sub list_of { '::User' }
 
-sub my_url { '/users' }
+sub api_path { 'users' }
 
 1;
 __END__

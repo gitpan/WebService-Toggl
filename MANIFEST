@@ -6,7 +6,6 @@ README.md
 cpanfile
 examples/basic.pl
 lib/WebService/Toggl.pm
-lib/WebService/Toggl/API.pm
 lib/WebService/Toggl/API/Client.pm
 lib/WebService/Toggl/API/Clients.pm
 lib/WebService/Toggl/API/Me.pm
@@ -26,13 +25,14 @@ lib/WebService/Toggl/API/Workspace.pm
 lib/WebService/Toggl/API/WorkspaceUser.pm
 lib/WebService/Toggl/API/WorkspaceUsers.pm
 lib/WebService/Toggl/API/Workspaces.pm
-lib/WebService/Toggl/Report.pm
 lib/WebService/Toggl/Report/Details.pm
 lib/WebService/Toggl/Report/Summary.pm
 lib/WebService/Toggl/Report/Weekly.pm
 lib/WebService/Toggl/Request.pm
+lib/WebService/Toggl/Role/API.pm
 lib/WebService/Toggl/Role/Base.pm
 lib/WebService/Toggl/Role/Item.pm
+lib/WebService/Toggl/Role/Report.pm
 lib/WebService/Toggl/Role/Set.pm
 minil.toml
 t/00_compile.t

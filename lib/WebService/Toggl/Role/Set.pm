@@ -4,7 +4,6 @@ use Moo::Role;
 with 'WebService::Toggl::Role::Base';
 
 requires 'list_of';
-requires 'my_url';
 
 has raw => (is => 'ro', lazy => 1, builder => 1);
 sub _build_raw {
@@ -40,10 +39,6 @@ C<WebService::Toggl::API::> objects.
 =head2 list_of
 
 The class name of the objects this set comprises.
-
-=head2 my_url
-
-The URL to the collection.
 
 =head1 ATTRIBUTES
 

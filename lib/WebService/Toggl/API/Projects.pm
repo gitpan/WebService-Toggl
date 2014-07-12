@@ -1,12 +1,12 @@
 package WebService::Toggl::API::Projects;
 
 use Moo;
-with 'WebService::Toggl::API', 'WebService::Toggl::Role::Set';
+with 'WebService::Toggl::Role::API', 'WebService::Toggl::Role::Set';
 use namespace::clean;
 
 sub list_of { '::Project' }
 
-sub my_url { '/projects' }
+sub api_path { 'projects' }
 
 1;
 __END__

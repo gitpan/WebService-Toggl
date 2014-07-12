@@ -3,7 +3,7 @@ package WebService::Toggl::Report::Summary;
 use Types::Standard qw(Bool);
 
 use Moo;
-with 'WebService::Toggl::Report';
+with 'WebService::Toggl::Role::Report';
 use namespace::clean;
 
 sub api_path { 'summary' }

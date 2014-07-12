@@ -48,6 +48,7 @@
             "Module::Runtime" : "0",
             "Moo" : "0",
             "Package::Variant" : "0",
+            "Role::REST::Client" : "0",
             "Storable" : "0",
             "Sub::Quote" : "0",
             "Types::Standard" : "0",
@@ -58,6 +59,8 @@
       },
       "test" : {
          "requires" : {
+            "IO::All" : "0",
+            "JSON::MaybeXS" : "0",
             "Module::Pluggable" : "0",
             "Test::More" : "0.98"
          }
@@ -66,10 +69,7 @@
    "provides" : {
       "WebService::Toggl" : {
          "file" : "lib/WebService/Toggl.pm",
-         "version" : "0.04"
-      },
-      "WebService::Toggl::API" : {
-         "file" : "lib/WebService/Toggl/API.pm"
+         "version" : "0.05"
       },
       "WebService::Toggl::API::Client" : {
          "file" : "lib/WebService/Toggl/API/Client.pm"
@@ -128,9 +128,6 @@
       "WebService::Toggl::API::Workspaces" : {
          "file" : "lib/WebService/Toggl/API/Workspaces.pm"
       },
-      "WebService::Toggl::Report" : {
-         "file" : "lib/WebService/Toggl/Report.pm"
-      },
       "WebService::Toggl::Report::Details" : {
          "file" : "lib/WebService/Toggl/Report/Details.pm"
       },
@@ -143,11 +140,17 @@
       "WebService::Toggl::Request" : {
          "file" : "lib/WebService/Toggl/Request.pm"
       },
+      "WebService::Toggl::Role::API" : {
+         "file" : "lib/WebService/Toggl/Role/API.pm"
+      },
       "WebService::Toggl::Role::Base" : {
          "file" : "lib/WebService/Toggl/Role/Base.pm"
       },
       "WebService::Toggl::Role::Item" : {
          "file" : "lib/WebService/Toggl/Role/Item.pm"
+      },
+      "WebService::Toggl::Role::Report" : {
+         "file" : "lib/WebService/Toggl/Role/Report.pm"
       },
       "WebService::Toggl::Role::Set" : {
          "file" : "lib/WebService/Toggl/Role/Set.pm"
@@ -164,5 +167,5 @@
          "web" : "https://github.com/felliott/WebService-Toggl"
       }
    },
-   "version" : "0.04"
+   "version" : "0.05"
 }

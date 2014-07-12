@@ -1,7 +1,9 @@
 #!/usr/bin/env perl
 
-use strictures;
-use feature ':5.14';
+use strict;
+use warnings;
+
+use v5.10;
 
 use FindBin qw($Bin);
 use lib "$Bin/../lib";

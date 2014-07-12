@@ -1,5 +1,8 @@
 Revision history for Perl extension WebService-Toggl
 
+0.05 2014-07-12T19:28:42Z
+    - add more missing dependencies
+
 0.04 2014-07-11T14:14:56Z
 
     - remove Data::Printer used for debugging
