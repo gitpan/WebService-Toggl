@@ -10,7 +10,7 @@ build_requires:
 configure_requires:
   Module::Build::Tiny: '0.035'
 dynamic_config: 0
-generated_by: 'Minilla/v2.1.1, CPAN::Meta::Converter version 2.141520'
+generated_by: 'Minilla/v2.1.1, CPAN::Meta::Converter version 2.142060'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -29,7 +29,7 @@ no_index:
 provides:
   WebService::Toggl:
     file: lib/WebService/Toggl.pm
-    version: '0.05'
+    version: '0.06'
   WebService::Toggl::API::Client:
     file: lib/WebService/Toggl/API/Client.pm
   WebService::Toggl::API::Clients:
@@ -104,4 +104,4 @@ resources:
   bugtracker: https://github.com/felliott/WebService-Toggl/issues
   homepage: https://github.com/felliott/WebService-Toggl
   repository: git://github.com/felliott/WebService-Toggl
-version: '0.05'
+version: '0.06'

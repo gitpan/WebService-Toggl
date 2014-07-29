@@ -1,5 +1,8 @@
 package WebService::Toggl::Role::Item;
 
+use strict;
+use warnings;
+
 use Package::Variant
     importing => ['Moo::Role'],
     subs      => [qw(has with around)];

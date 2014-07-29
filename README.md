@@ -26,7 +26,7 @@ currently only supports read access to the API, but I plan to add
 write access in the near future.**
 
 [WebService::Toggl](https://metacpan.org/pod/WebService::Toggl) is a perl interface to the
-[http://www.toggl.com|Toggl](http://www.toggl.com|Toggl) API, as described at
+[Toggl](http://www.toggl.com) API, as described at
 [https://github.com/toggl/toggl\_api\_docs](https://github.com/toggl/toggl_api_docs).  When a new
 `WebService::Toggl` object is created, it is associated with a
 particulars user's credentials via their API token.  The API token can
@@ -49,12 +49,12 @@ will be issued until you request an attribute that has not yet been set. E.g.
 Each `API::` and `Report::` object stores the raw response received
 from Toggl in an attribute called `raw`.  If you want to force the
 object to fill itself in with data from the API, calling
-<$object->raw> will do so.
+`$object->raw()` will do so.
 
 ## Set objects
 
 Each `API::` class has a corresponding class that represents a set of
-the objects.  These set objects store the raw response query, and will
+the objects.  These set objects store the raw response query and will
 return a list of the objects it comprises via the `->all()`
 method.
 
@@ -62,8 +62,9 @@ method.
 
 You can make other requests against the Toggle API via the
 `api_{get,post,put,delete}()` methods provided by
-[WebService::Toggl::Role::Base](https://metacpan.org/pod/WebService::Toggl::Role::Base).  For instance, if you had a Tag
-object that you wanted to delete, you could write:
+[WebService::Toggl::Role::Base](https://metacpan.org/pod/WebService::Toggl::Role::Base).  For instance, if you had a
+[WebService::Toggl::API::Tag](https://metacpan.org/pod/WebService::Toggl::API::Tag) object that you wanted to delete, you
+could write:
 
     $tag->api_delete( $tag->my_url );
 

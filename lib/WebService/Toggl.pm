@@ -6,7 +6,7 @@ use Moo;
 with 'WebService::Toggl::Role::Base';
 use namespace::clean;
 
-our $VERSION = "0.05";
+our $VERSION = "0.06";
 
 
 has 'me' => (is =>'ro', lazy => 1, builder => 1);
@@ -70,7 +70,7 @@ currently only supports read access to the API, but I plan to add
 write access in the near future. >>
 
 L<WebService::Toggl> is a perl interface to the
-L<http://www.toggl.com|Toggl> API, as described at
+L<Toggl|http://www.toggl.com> API, as described at
 L<https://github.com/toggl/toggl_api_docs>.  When a new
 C<WebService::Toggl> object is created, it is associated with a
 particulars user's credentials via their API token.  The API token can
@@ -93,12 +93,12 @@ will be issued until you request an attribute that has not yet been set. E.g.
 Each C<API::> and C<Report::> object stores the raw response received
 from Toggl in an attribute called C<raw>.  If you want to force the
 object to fill itself in with data from the API, calling
-<$object->raw> will do so.
+C<< $object->raw() >> will do so.
 
 =head2 Set objects
 
 Each C<API::> class has a corresponding class that represents a set of
-the objects.  These set objects store the raw response query, and will
+the objects.  These set objects store the raw response query and will
 return a list of the objects it comprises via the C<< ->all() >>
 method.
 
@@ -106,8 +106,9 @@ method.
 
 You can make other requests against the Toggle API via the
 C<api_{get,post,put,delete}()> methods provided by
-L<WebService::Toggl::Role::Base>.  For instance, if you had a Tag
-object that you wanted to delete, you could write:
+L<WebService::Toggl::Role::Base>.  For instance, if you had a
+L<WebService::Toggl::API::Tag> object that you wanted to delete, you
+could write:
 
  $tag->api_delete( $tag->my_url );
 

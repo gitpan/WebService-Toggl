@@ -1,5 +1,10 @@
 Revision history for Perl extension WebService-Toggl
 
+0.06 2014-07-29T14:43:23Z
+
+    - add use strict/warnings to ::Role::Item
+    - minor pod fixes
+
 0.05 2014-07-12T19:28:42Z
     - add more missing dependencies
 
