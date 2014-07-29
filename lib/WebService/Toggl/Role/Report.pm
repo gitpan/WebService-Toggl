@@ -79,6 +79,8 @@ URL for the current Report object.
 
 The raw data structure returned by querying the API.
 
+=head1 REQUEST ATTRIBUTES
+
 =head2 workspace_id
 
 The ID of the workspace for which the report is being generated.
@@ -88,11 +90,30 @@ The ID of the workspace for which the report is being generated.
 L<DateTime> objects representing the bounding period for the report.
 Defaults to C<until> = today, C<since> = today - 6 days
 
-=head1 RESPONSE PARAMETERS
+=head1 RESPONSE ATTRIBUTES
 
-=head2 total_grand / total_billable / total_currencies / data
+These attributes are common to all reports.  See the L<Toggl API
+Docs|https://github.com/toggl/toggl_api_docs/blob/master/reports.md#successful-response>
+for more information
 
-See the L<Toggl API Docs|https://github.com/toggl/toggl_api_docs/blob/master/reports.md#successful-response>.
+=head2 total_grand
+
+Total time (in milliseconds) represented by the entries in the report.
+
+=head2 total_billable
+
+Total billable time (in milliseconds) represented by the entries in
+the report.
+
+=head2 total_currencies
+
+Total earnings represented by the entries in the report.
+
+=head2 data
+
+The detailed contents of the report.  This will differ between each
+type of report.
+
 
 =head1 LICENSE
 

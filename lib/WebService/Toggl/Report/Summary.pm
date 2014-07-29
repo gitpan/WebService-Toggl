@@ -29,76 +29,101 @@ has grouped_time_entry_ids => (is => 'ro', isa => Bool, default => 0,);
 1;
 __END__
 
+=encoding utf-8
 
-subgrouping_ids (boolean)
-   - whether returned items will contain 'ids' key
-     containing coma separated group item ID values
+=head1 NAME
 
-grouped_time_entry_ids (boolean)
-   - whether returned items will contain 'time_entry_ids'
-     key containing coma separated time entries ID values for given item
+WebService::Toggl::Report::Summary - Toggl summary report object
+
+=head1 SYNOPSIS
+
+ use WebService::Toggl;
+ my $toggl = WebService::Toggl->new({api_key => 'foo'});
+
+ my $report = $toggl->summary({
+   workspace_id => 1234,
+   grouping => 'projects', subgrouping => 'time_entries',
+ });
+
+ say $report->total_billable;  # billable milliseconds
+ for $project (@{ $report->data }) {
+   say "Time Entries For project $project->{title}{project}:";
+   for my $item (@{ $project->{items} }) {
+     say $item->{title}{time_entry} . " took "
+       . ($entry->{time} / 1000) . " seconds";
+   }
+ }
 
 
+=head1 DESCRIPTION
 
-has items => (is => 'ro', lazy => 1, builder => 1);
-sub _build_items { $_[0]->raw->{data} }
+This module is a wrapper object around the Toggl summary report
+L<described here|
+https://github.com/toggl/toggl_api_docs/blob/master/reports/summary.md>.
+It returns a report of properties that are grouped and subgrouped
+according to the specified request attributes.
 
-  {
-    "data": [
-      {
-        "id":73569,
-        "title":{"project":"Toggl Desktop","client":"Toggl"},
-        "time":14400000,
-        "total_currencies":[{"currency":"EUR","amount":40}],
-        "items":[
-          {
-            "title":{"time_entry":"Implementing some important things"},
-            "time":14400000,
-            "cur":"EUR",
-            "sum":40,
-            "rate":10
-          }
-        ]
-      },{
-        "id":193009951,
-        "title":{"project":"Toggl Development","client":null},
-        "time":14400000,
-        "total_currencies":[{"currency":"EUR","amount":0}],
-        "items":[
-          {
-            "title":{"time_entry":"Hard work"},
-            "time":14400000,
-            "cur":"EUR",
-            "sum":0,
-            "rate":50
-          }
-        ]
-      },{
-        "id":null,
-        "title":{"project":null,"client":null},
-        "time":7204000,
-        "total_currencies":[],
-        "items":[
-          {
-            "title":{"time_entry":"No title yet"},
-            "time":1000,
-            "cur":"EUR",
-            "sum":0,
-            "rate":50
-          },{
-            "title":{"time_entry":"Did nothing"},
-            "time":1000,
-            "cur":"EUR",
-            "sum":0,
-            "rate":50
-          },{
-            "title":{"time_entry":"Hard work again"},
-            "time":7202000,
-            "cur":"EUR",
-            "sum":0,
-            "rate":50
-          }
-        ]
-      }
-    ]
-  }
+=head1 REQUEST ATTRIBUTES
+
+Request attributes common to all reports are detailed in the
+L<::Role::Request|WebService::Toggl::Role::Report#REQUEST-ATTRIBUTES> pod.
+
+=head2 grouping / subgrouping
+
+The primary and secondary grouping properties.  Defaults to
+C<projects> and C<time_entries> respectively.  The following
+combinations are valid:
+
+ +--------------------------------------------------------+
+ |           |                Group                       |
+ |           +--------------+--------------+--------------+
+ |           | projects     | clients      | users        |
+ +-----------+--------------+--------------+--------------+
+ |           | time_entries | time_entries | time_entries |
+ | Valid     | tasks        | tasks        | tasks        |
+ | Subgroups | users        | users        |              |
+ |           |              | projects     | projects     |
+ |           |              |              | clients      |
+ +-----------+--------------+--------------+--------------+
+
+
+=head2 subgrouping_ids
+
+Boolean that determines if an C<ids> key containing a comma-separated
+list of subgroup ids will be added each group in the C<data> key.
+
+=head2 grouped_time_entry_ids
+
+Boolean that determines if a C<time_entry_ids> key containing a
+comma-separated list of time entry IDs will be added each group in the
+C<data> key.
+
+
+=head1 RESPONSE ATTRIBUTES
+
+Response attributes common to all reports are detailed in the
+L<::Role::Request|WebService::Toggl::Role::Report#RESPONSE-ATTRIBUTES> pod.
+
+C<::Report::Summary> returns no additional response attributes.
+
+=head1 REPORT DATA
+
+The C<data()> attribute of a C<::Report::Summary> object is an
+arrayref of grouping hashrefs.  Each group hashref will contain C<id>,
+C<title>, and C<items> keys.  The C<items> key holds an arrayref of
+the requested subgrouping objects. For a detailed description of the
+contents of this structure, see the L<Toggl API
+docs|https://github.com/toggl/toggl_api_docs/blob/master/reports/summary.md>.
+
+=head1 LICENSE
+
+Copyright (C) Fitz Elliott.
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
+
+=head1 AUTHOR
+
+Fitz Elliott E<lt>felliott@fiskur.orgE<gt>
+
+=cut

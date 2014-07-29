@@ -28,63 +28,91 @@ has week_totals => (is => 'ro', lazy => 1, builder => quote_sub(qq| \$_[0]->raw-
 __END__
 
 
-grouping == projects:
+=encoding utf-8
 
-{
-    "title":{"project":"Toggl Desktop","client":"Toggl"},
-    "pid":7363449,
-    "totals":[null,null,null,null,14400000,null,null,14400000],
-    "details":[
-      {
-        "uid":352243,
-        "title":{"user":"John Swift"},
-        "totals":[null,null,null,null,14400000,null,null,14400000]
-      }
-    ]
-  }
+=head1 NAME
 
+WebService::Toggl::Report::Weekly - Toggl weekly aggregated report object
 
-grouping == users:
+=head1 SYNOPSIS
 
-  {
-    "title":{"user":"John Swift"},
-    "uid":352243,
-    "totals":[null,null,14400000,null,14400000,null,null,28800000],
-    "details":[
-      {
-        "pid":73649,
-        "title":{ "client":"Toggl","project":"Toggl Desktop"},
-        "totals":[null,null,null,null,14400000,null,null,14400000]
-      },
-      {
-        "pid":1120651,
-        "title":{"client":null,"project":"Super big client"},
-        "totals":[null,null,14400000,null,null,null,null,14400000]
-      }
-    ]
-  }
+ use WebService::Toggl;
+ my $toggl = WebService::Toggl->new({api_key => 'foo'});
 
+ my $report = $toggl->weekly({
+   workspace_id => 1234,
+   grouping => 'projects', calculate => 'earnings',
+ });
 
-calculate == time:
+ say $report->total_billable;  # billable milliseconds
+ say $report->week_totals;     # array of totals per day
+ for $project (@{ $report->data }) {
+   say "Project $project->{title}{project} earned "
+     . "$project->{amount}[7] $project->{currency} this week.";
+   for my $user ($projects->{details}) {
+     say "  User $user->{title}{user} contributed "
+       . "$user->{amount}[7] $user->{currency} to that total";
+   }
+ }
 
-  it is a simple array with 8 numbers - each for one day and the 8th
-  for the seven day total.
+=head1 DESCRIPTION
 
-  totals:[null,null,0,null,40,null,null,40]
+This module is a wrapper object around the Toggl weekly report
+L<described here|
+https://github.com/toggl/toggl_api_docs/blob/master/reports/weekly.md>.
+It returns a report of either time spent or earnings grouped by either
+project or user.
 
-calculate == earnings:
+=head1 REQUEST ATTRIBUTES
 
-  it is an array of objects with currency string and the amounts array
-  with 8 numbers - each for one day and the 8th for the seven day
-  total.
+Request attributes common to all reports are detailed in the
+L<::Role::Request|WebService::Toggl::Role::Report#REQUEST-ATTRIBUTES> pod.
 
-  "totals":[
-    {
-      "currency":"EUR",
-      "amount":[null,null,0,null,40,null,null,40]
-    },
-    {
-      "currency":"USD",
-      "amount":[20,null,0,null,14,null,null,34]
-    }
-  ]
+The C<until> attribute is ignored for the weekly report. It is always
+assumed to be C<since> plus six days (for a total of seven).
+
+=head2 grouping
+
+Which metric to group reports by.  Must be either C<projects> or
+C<users>.  Whichever is B<not> selected is used as the subgrouping
+parameter.
+
+=head2 calculate
+
+The property to aggregate.  Must be one of C<time> or C<earnings>.
+
+=head1 RESPONSE ATTRIBUTES
+
+Response attributes common to all reports are detailed in the
+L<::Role::Request|WebService::Toggl::Role::Report#RESPONSE-ATTRIBUTES> pod.
+
+=head2 weekly_totals
+
+Eight-element array ref showing aggregated totals of the L</calculate>
+property for each day, with a sum total as the last element.
+
+=head1 REPORT DATA
+
+The C<data> attribute of a C<::Report::Weekly> object is an arrayref
+of hashrefs representing the L<grouping> property.  It contains a
+C<details> key with an array of hashrefs representing the subgrouping
+parameter.  If the L</calculate> property is C<time>, the C<data>
+attribute will contain a C<totals> key with the daily time aggregates.
+If L</caluclate> is C<earnings> , it will contain a C<currency> key
+and an C<amounts> key with the daily aggregated earnings.  For more
+details, see the L<Toggl API
+docs|https://github.com/toggl/toggl_api_docs/blob/master/reports/weekly.md>.
+
+=head1 LICENSE
+
+Copyright (C) Fitz Elliott.
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
+
+=head1 AUTHOR
+
+Fitz Elliott E<lt>felliott@fiskur.orgE<gt>
+
+=cut
+
