@@ -1,6 +1,6 @@
 package WebService::Toggl::Report::Summary;
 
-use Types::Standard qw(Bool);
+use Types::Standard qw(Bool Enum);
 
 use Moo;
 with 'WebService::Toggl::Role::Report';
@@ -14,10 +14,32 @@ around _req_params => sub {
     return [ @{$self->$orig}, qw(grouping subgrouping) ]; # subgrouping_ids grouped_time_entry_ids) ];
 };
 
+my @valid_groups = (
+    ['projects', [qw(time_entries tasks users                 )]],
+    ['clients',  [qw(time_entries tasks users projects        )]],
+    ['users',    [qw(time_entries tasks       projects clients)]],
+);
+my %valid_groups = map {
+    $_->[0] => { map {$_ => 1} @{ $_->[1] } }
+} @valid_groups;
+my @uniq_subgroups = do {
+    my %seen;
+    grep { !$seen{$_}++ }
+        map { @{$_->[1]} } @valid_groups
+};
+
 # request params
-has grouping    => (is => 'ro', default => 'projects',);
-has subgrouping => (is => 'ro', default => 'tasks',);
-has subgrouping_ids => (is => 'ro', isa => Bool, default => 0,);
+has grouping    => (
+    is      => 'ro',
+    isa     => Enum[keys %valid_groups],
+    default => 'projects',
+);
+has subgrouping => (
+    is      => 'ro',
+    isa     => Enum[@uniq_subgroups],
+    default => 'tasks',
+);
+has subgrouping_ids        => (is => 'ro', isa => Bool, default => 0,);
 has grouped_time_entry_ids => (is => 'ro', isa => Bool, default => 0,);
 
 
@@ -90,13 +112,14 @@ combinations are valid:
 =head2 subgrouping_ids
 
 Boolean that determines if an C<ids> key containing a comma-separated
-list of subgroup ids will be added each group in the C<data> key.
+list of subgroup ids will be added each group in the C<data>
+key. Defaults to C<false>.
 
 =head2 grouped_time_entry_ids
 
 Boolean that determines if a C<time_entry_ids> key containing a
 comma-separated list of time entry IDs will be added each group in the
-C<data> key.
+C<data> key. Defaults to C<false>.
 
 
 =head1 RESPONSE ATTRIBUTES

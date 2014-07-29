@@ -1,6 +1,7 @@
 package WebService::Toggl::Report::Weekly;
 
 use Sub::Quote qw(quote_sub);
+use Types::Standard qw(Enum);
 
 use Moo;
 with 'WebService::Toggl::Role::Report';
@@ -15,14 +16,22 @@ around _req_params => sub {
 };
 
 # request params
-has grouping  => (is => 'ro'); # users, projects
-has calculate => (is => 'ro'); # time, earnings
+has grouping  => (
+    is      => 'ro',
+    isa     => Enum[qw(users projects)],
+    default => 'projects',
+);
+has calculate => (
+    is      => 'ro',
+    isa     => Enum[qw(time earnings)],
+    default => 'time',
+);
 
 
 # repsonse params
 #  **none**
 
-has week_totals => (is => 'ro', lazy => 1, builder => quote_sub(qq| \$_[0]->raw->{$_} |));
+has week_totals => (is => 'ro', lazy => 1, builder => quote_sub(qq| \$_[0]->raw->{week_totals} |));
 
 1;
 __END__

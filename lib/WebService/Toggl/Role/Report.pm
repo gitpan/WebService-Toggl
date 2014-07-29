@@ -2,6 +2,7 @@ package WebService::Toggl::Role::Report;
 
 use DateTime;
 use Sub::Quote qw(quote_sub);
+use Types::Standard qw(Int InstanceOf);
 
 use Moo::Role;
 with 'WebService::Toggl::Role::Base';
@@ -30,9 +31,9 @@ sub req_params {
 }
 
 # request params
-has workspace_id => (is => 'ro', required => 1,);
-has since        => (is => 'ro', lazy => 1, builder => 1,);
-has until        => (is => 'ro', lazy => 1, builder => 1,);
+has workspace_id => (is => 'ro', isa => Int, required => 1,);
+has since        => (is => 'ro', isa => InstanceOf['DateTime'], lazy => 1, builder => 1,);
+has until        => (is => 'ro', isa => InstanceOf['DateTime'], lazy => 1, builder => 1,);
 sub _build_since { shift->until->clone->subtract(days => 6) }
 sub _build_until { DateTime->now }
 

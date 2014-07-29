@@ -15,9 +15,10 @@ requires 'URI::Escape';
 
 
 on 'test' => sub {
-    requires 'Test::More', '0.98';
     requires 'Module::Pluggable';
     requires 'IO::All';
     requires 'JSON::MaybeXS';
+    requires 'Test::Fatal';
+    requires 'Test::More', '0.98';
 };
 

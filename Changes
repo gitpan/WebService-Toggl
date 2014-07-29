@@ -1,5 +1,12 @@
 Revision history for Perl extension WebService-Toggl
 
+0.08 2014-07-29T19:56:05Z
+
+    - add very basic tests for Reports
+    - make ::Report::Weekly compile by specifying week_total key
+    - fix ::Report::Details api_path
+    - add type checking to ::Report::*
+
 0.07 2014-07-29T18:01:34Z
 
     - add documentation for ::Report::* objects

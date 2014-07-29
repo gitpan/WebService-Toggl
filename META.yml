@@ -6,6 +6,7 @@ build_requires:
   IO::All: '0'
   JSON::MaybeXS: '0'
   Module::Pluggable: '0'
+  Test::Fatal: '0'
   Test::More: '0.98'
 configure_requires:
   Module::Build::Tiny: '0.035'
@@ -29,7 +30,7 @@ no_index:
 provides:
   WebService::Toggl:
     file: lib/WebService/Toggl.pm
-    version: '0.07'
+    version: '0.08'
   WebService::Toggl::API::Client:
     file: lib/WebService/Toggl/API/Client.pm
   WebService::Toggl::API::Clients:
@@ -104,4 +105,4 @@ resources:
   bugtracker: https://github.com/felliott/WebService-Toggl/issues
   homepage: https://github.com/felliott/WebService-Toggl
   repository: git://github.com/felliott/WebService-Toggl
-version: '0.07'
+version: '0.08'
